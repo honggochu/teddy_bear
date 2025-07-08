@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blender Animation Test</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            background-color: #f0f0f0;
+        }
+        model-viewer {
+            width: 800px;
+            height: 600px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .camera-instructions {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        .camera-instructions ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .camera-instructions li {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blender Animation Test</h1>
+    <model-viewer
+        src="test_animation.glb"
+        alt="Teddy Bear Animations"
+        ar
+        ar-modes="webxr scene-viewer quick-look"
+        camera-controls
+        shadow-intensity="1"
+        autoplay
+        animation-name="Idle"
+        field-of-view="45deg"
+        max-field-of-view="90deg"
+        min-field-of-view="5deg"
+    ></model-viewer>
+
+    <div class="controls">
+        <button onclick="playAnimation('Idle')">Idle</button>
+        <button onclick="playAnimation('Walk')">Walk</button>
+        <button onclick="playAnimation('Jumping')">Jumping</button>
+    </div>
+
+    <div class="camera-instructions">
+        <p><strong>카메라 조작법:</strong></p>
+        <ul>
+            <li><strong>회전:</strong> 마우스 왼쪽 클릭 + 드래그</li>
+            <li><strong>이동:</strong> 마우스 오른쪽 클릭 + 드래그</li>
+            <li><strong>확대/축소:</strong> 마우스 휠 스크롤</li>
+        </ul>
+    </div>
+
+    <script>
+        const modelViewer = document.querySelector('model-viewer');
+
+        function playAnimation(animationName) {
+            modelViewer.animationName = animationName;
+            modelViewer.play();
+        }
+    </script>
+</body>
+</html>
